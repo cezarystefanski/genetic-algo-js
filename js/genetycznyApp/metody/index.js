@@ -6,6 +6,7 @@ import pokazDostosowanieSrednie from './pokazDostosowanieSrednie/';
 import dostosowanieNormalizacja from './dostosowanieNormalizacja/';
 import ruletka from './ruletka/';
 import krzyzowanie from './krzyzowanie/';
+import mutacje from './mutacje/';
 
 export {
   losujPopulacja,
@@ -15,5 +16,6 @@ export {
   pokazDostosowanieSrednie,
   dostosowanieNormalizacja,
   ruletka,
-  krzyzowanie
+  krzyzowanie,
+  mutacje
 };

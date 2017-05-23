@@ -1,5 +1,21 @@
-import { losujBaze, pokazPopulacje, bootstrapSliders, bootstrapButton } from './helpers/';
-import { losujPopulacja, obliczFenotypy, obliczDostosowanie, pokazDostosowanieSrednie, dostosowanieNormalizacja, ruletka, krzyzowanie } from './metody/';
+import {
+  losujBaze,
+  pokazPopulacje,
+  bootstrapSliders,
+  bootstrapButton
+} from './helpers/';
+
+import {
+  losujPopulacja,
+  obliczFenotypy,
+  obliczDostosowanie,
+  pokazDostosowanieSrednie,
+  dostosowanieNormalizacja,
+  ruletka,
+  krzyzowanie,
+  mutacje
+} from './metody/';
+
 import * as defaults from './defaults/';
 
 const runApp = (store, rootNode) => {
@@ -10,21 +26,34 @@ const runApp = (store, rootNode) => {
     return accumulator;
   }, {});
 
-  console.info(dane);
+  //console.info(dane);
 
+  const wyniki = [];
   const baza = losujBaze(dane);
-  debugger;
+  // debugger;
   const populacja = losujPopulacja(dane);
+  //console.log(populacja);
   const fenotypy = obliczFenotypy(populacja, dane);
+  //console.log(fenotypy);
   const dostosowanie = obliczDostosowanie(fenotypy, dane);
-  pokazDostosowanieSrednie(numerPokolenia, rootNode, dostosowanie, dane);
+  //console.log(dostosowanie);
+  wyniki.push(pokazDostosowanieSrednie(numerPokolenia, rootNode, dostosowanie, dane));
+  let populacjaCykl = populacja;
+  let dostosowanieCykl = dostosowanie;
   while(numerPokolenia < dane.suwakPokolen) {
-    const noweDostosowanie = dostosowanieNormalizacja(dostosowanie, dane);
-    const {nowaPopulacja, nowePokolenie} = ruletka(noweDostosowanie, dane, populacja);
+    const noweDostosowanie = dostosowanieNormalizacja(dostosowanieCykl, dane);
+    // console.warn(populacjaCykl);
+    const {nowaPopulacja, nowePokolenie} = ruletka(noweDostosowanie, dane, populacjaCykl);
     const populacjaPoKrzyzowaniu = krzyzowanie(nowaPopulacja, dane);
-    console.log(populacjaPoKrzyzowaniu);
+    const populacjaPoMutacji = mutacje(populacjaPoKrzyzowaniu, dane);
+    populacjaCykl = populacjaPoMutacji;
+    const noweFenotypy = obliczFenotypy(populacjaPoMutacji, dane);
+    const dostosowaniePoMutacji = obliczDostosowanie(noweFenotypy, dane);
+    dostosowanieCykl = dostosowaniePoMutacji
     numerPokolenia += 1;
+    wyniki.push(pokazDostosowanieSrednie(numerPokolenia, rootNode, dostosowaniePoMutacji, dane));
   }
+  console.log(wyniki);
 }
 
 const App = () => {

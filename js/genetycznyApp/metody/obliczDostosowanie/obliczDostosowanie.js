@@ -4,8 +4,10 @@ function obliczDostosowanie(fenotypy, dane) {
   let i = 0;
   for(i; i < pula; i += 1) {
     const x = fenotypy[i];
-    dostosowanie[i] = (Math.exp(x) * Math.sin(Math.PI * x) + 1) / x;
+    dostosowanie[i] = + ((Math.exp(x) * Math.sin(Math.PI * x) + 1) / x).toFixed(4);
+    // console.log(dostosowanie[i]);
   }
+  // console.log('');
   return dostosowanie;
 }
 

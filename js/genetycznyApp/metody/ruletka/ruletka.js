@@ -1,28 +1,10 @@
 function ruletka(dostosowanie, dane, populacja) {
-  //  float tablica_NI[pula];
-  // float suma_dostosowanie=0;
-  // for(int i=0; i<pula; i++) suma_dostosowanie+=DOSTOSOWANIE[i];
-  // for(int i=0; i<pula; i++) tablica_NI[i]=DOSTOSOWANIE[i]/suma_dostosowanie*Power2N;
-  // int losowe[pula];         //liczby losowe z przedzia³u 0...Power2N-1
-  // srand(pobierz_baze());
-  // for(int i=0; i<pula; i++) losowe[i]=rand()%Power2N;
-  // float ruletka[pula];      //pozycje wycinków ruletki
-  // float pozycja=0;
-  // for(int i=0; i<pula; i++){
-  //   pozycja+=tablica_NI[i];
-  //   ruletka[i]=pozycja;
-  // }
-  // for(int i=0; i<pula; i++){
-  //   int j=0;
-  //   while(losowe[i]>ruletka[j]) j++;
-  //   for(int k=0; k<N; k++) NOWE_POKOLENIE[i][k]=POPULACJA[j][k];
-  // }
-  // for(int i=0; i<pula; i++) for(int k=0; k<N; k++) 
-  // POPULACJA[i][k]=NOWE_POKOLENIE[i][k];
-  debugger;
   const { suwakGenow: liczbaGenow, suwakPuli: pula } = dane;
+  //console.log(dostosowanie);
   const sumaDostosowanie = dostosowanie.reduce((acc, val) => {return acc + val}, 0);
+  //console.log(sumaDostosowanie);
   const tablicaNi = dostosowanie.map((elem) => elem / sumaDostosowanie * Math.pow(2, liczbaGenow));
+  //console.log(tablicaNi);
   let i = 0;
   const losowe = [];
   const ruletka = [];

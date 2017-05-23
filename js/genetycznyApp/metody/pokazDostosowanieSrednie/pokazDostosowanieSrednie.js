@@ -25,11 +25,12 @@ function pokazDostosowanieSrednie(nrPokolenia, rootNode, dostosowanie, dane) {
   for (j; j < pula; j++) {
     srednia += dostosowanie[j];
   }
-  const wynik = srednia / pula;
+  const wynik = + (srednia / pula).toFixed(4);
   const names = [nrPokolenia, wynik];
   const row = createRow(false, names);
   table.appendChild(row);
   context.appendChild(table);
+  return wynik;
 }
 
 export default pokazDostosowanieSrednie;
