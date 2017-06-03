@@ -33,6 +33,9 @@ function visualizeData(data) {
     .attr("d", line(parsedData))
     .attr("stroke", "black")
     .attr("fill", "none");
+
+  const wrapper = document.getElementById('svgroot');
+  wrapper.classList.remove('hidden');
 }
 
 export default visualizeData;

@@ -199,3 +199,28 @@ td {
     stroke-linejoin: round;
     stroke-width: 5px;
 }
+
+.hidden {
+    display: none;
+}
+
+table td:first-child,
+table th:first-child {
+    width: 250px;
+}
+
+label {
+    margin-left: 2em;
+    margin-bottom: 1em;
+    position: relative;
+    top: -30px;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    top: -30px;
+}
+
+p {
+    margin-bottom: 3em;
+}
