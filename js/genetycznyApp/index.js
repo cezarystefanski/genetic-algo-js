@@ -2,7 +2,8 @@ import {
   losujBaze,
   pokazPopulacje,
   bootstrapSliders,
-  bootstrapButton
+  bootstrapButton,
+  visualizeData
 } from './helpers/';
 
 import {
@@ -22,27 +23,25 @@ const runApp = (store, rootNode) => {
   let numerPokolenia = 1;
   const storeKeys = Object.keys(store);
   const dane = storeKeys.reduce((accumulator, key) => {
+    if (store[key].getAttribute('type') === 'checkbox') {
+      accumulator[key] = store[key].checked;
+      return accumulator;
+    }
     accumulator[key] = store[key].value;
     return accumulator;
   }, {});
-
-  //console.info(dane);
+  console.log(dane);
 
   const wyniki = [];
   const baza = losujBaze(dane);
-  // debugger;
   const populacja = losujPopulacja(dane);
-  //console.log(populacja);
   const fenotypy = obliczFenotypy(populacja, dane);
-  //console.log(fenotypy);
   const dostosowanie = obliczDostosowanie(fenotypy, dane);
-  //console.log(dostosowanie);
   wyniki.push(pokazDostosowanieSrednie(numerPokolenia, rootNode, dostosowanie, dane));
   let populacjaCykl = populacja;
   let dostosowanieCykl = dostosowanie;
   while(numerPokolenia < dane.suwakPokolen) {
     const noweDostosowanie = dostosowanieNormalizacja(dostosowanieCykl, dane);
-    // console.warn(populacjaCykl);
     const {nowaPopulacja, nowePokolenie} = ruletka(noweDostosowanie, dane, populacjaCykl);
     const populacjaPoKrzyzowaniu = krzyzowanie(nowaPopulacja, dane);
     const populacjaPoMutacji = mutacje(populacjaPoKrzyzowaniu, dane);
@@ -53,6 +52,7 @@ const runApp = (store, rootNode) => {
     numerPokolenia += 1;
     wyniki.push(pokazDostosowanieSrednie(numerPokolenia, rootNode, dostosowaniePoMutacji, dane));
   }
+  visualizeData(wyniki);
   console.log(wyniki);
 }
 

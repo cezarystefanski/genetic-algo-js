@@ -1,4 +1,5 @@
 import createSlider from './createSlider';
+import createCheckbox from './createCheckbox';
 
 function bootstrapSliders(options) {
   const {
@@ -28,7 +29,9 @@ function bootstrapSliders(options) {
   const suwakWartoscKoncowa = createSlider(wartoscKoncowa, 2, 3, 0.1, context, names.wartoscKoncowa);
   const suwakGenow = createSlider(liczbaGenow, 10, 20, 1, context, names.liczbaGenow);
   const suwakKrzyzowania = createSlider(prawdKrzyzowania, 0.5, 1, 0.01, context, names.prawdKrzyzowania);
+  const checkerKrzyzowania = createCheckbox('disableKrzyzowanie', 'Wyłącz krzyżowanie', context);
   const suwakMutacji = createSlider(prawdMutacji, 0.01, 0.5, 0.01, context, names.prawdMutacji);
+  const checkerMutacji = createCheckbox('disableMutacji', 'Wyłącz mutacje', context);
   const suwakPuli = createSlider(pula, 10, 30, 1, context, names.pula);
 
   return {
@@ -38,7 +41,9 @@ function bootstrapSliders(options) {
     suwakGenow,
     suwakKrzyzowania,
     suwakMutacji,
-    suwakPuli
+    suwakPuli,
+    checkerKrzyzowania,
+    checkerMutacji
   };
 }
 
