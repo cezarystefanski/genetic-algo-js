@@ -9,10 +9,9 @@ const createRow = (isHead, values) => {
   return tr;
 }
 
-function pokazDostosowanieSrednie(nrPokolenia, rootNode, dostosowanie, dane) {
+function pokazDostosowanieSrednie(nrPokolenia, rootNode, dostosowanie, dane, table, nrBadania) {
   const { suwakPuli: pula } = dane;
-  const context = document.getElementById(rootNode);
-  const table = document.createElement('table');
+  const context = document.getElementById(`wyniki_${nrBadania}`);
   if (nrPokolenia === 1) {
     const thead = document.createElement('thead');
     const headNames = ['Nr pokolenia', 'Średnia wartość funkcji dostosowania']

@@ -3,7 +3,8 @@ import {
   pokazPopulacje,
   bootstrapSliders,
   bootstrapButton,
-  visualizeData
+  visualizeData,
+  bootstrapReset
 } from './helpers/';
 
 import {
@@ -19,7 +20,7 @@ import {
 
 import * as defaults from './defaults/';
 
-const runApp = (store, rootNode) => {
+const runApp = (store, rootNode, nrBadania) => {
   let numerPokolenia = 1;
   const storeKeys = Object.keys(store);
   const dane = storeKeys.reduce((accumulator, key) => {
@@ -32,12 +33,18 @@ const runApp = (store, rootNode) => {
   }, {});
   console.log(dane);
 
+  const div = document.createElement('div');
+  const table = document.createElement('table');
+  div.id = `wyniki_${nrBadania}`;
+  div.appendChild(table);
+  const wynikiNode = document.getElementById('wyniki');
+  wynikiNode.appendChild(div);
   const wyniki = [];
   const baza = losujBaze(dane);
   const populacja = losujPopulacja(dane);
   const fenotypy = obliczFenotypy(populacja, dane);
   const dostosowanie = obliczDostosowanie(fenotypy, dane);
-  wyniki.push(pokazDostosowanieSrednie(numerPokolenia, rootNode, dostosowanie, dane));
+  wyniki.push(pokazDostosowanieSrednie(numerPokolenia, rootNode, dostosowanie, dane, table, nrBadania));
   let populacjaCykl = populacja;
   let dostosowanieCykl = dostosowanie;
   while(numerPokolenia < dane.suwakPokolen) {
@@ -48,19 +55,39 @@ const runApp = (store, rootNode) => {
     populacjaCykl = populacjaPoMutacji;
     const noweFenotypy = obliczFenotypy(populacjaPoMutacji, dane);
     const dostosowaniePoMutacji = obliczDostosowanie(noweFenotypy, dane);
-    dostosowanieCykl = dostosowaniePoMutacji
+    dostosowanieCykl = dostosowaniePoMutacji;
     numerPokolenia += 1;
-    wyniki.push(pokazDostosowanieSrednie(numerPokolenia, rootNode, dostosowaniePoMutacji, dane));
+    wyniki.push(pokazDostosowanieSrednie(numerPokolenia, rootNode, dostosowaniePoMutacji, dane, table, nrBadania));
   }
-  visualizeData(wyniki);
+  visualizeData(wyniki, nrBadania, defaults);
   console.log(wyniki);
+  return wyniki;
 }
 
 const App = () => {
   const suwaki = bootstrapSliders(defaults);
   const button = bootstrapButton(defaults);
+  const reset = bootstrapReset(defaults);
   const { rootNode } = defaults;
-  button.addEventListener('click', () => runApp(suwaki, rootNode));
+  button.addEventListener('click', () => {
+    let nrBadania = 1;
+    const wynikiBadan = [];
+    const wyniki = document.getElementById('wyniki');
+    wyniki.innerHTML = '';
+    for (nrBadania; nrBadania <= suwaki.suwakBadan.value; nrBadania++) {
+      wynikiBadan.push(runApp(suwaki, rootNode, nrBadania));
+    }
+    console.log(wynikiBadan);
+    if (suwaki.suwakBadan.value > 1) {
+      for (let i = 0; i < suwaki.suwakPokolen.value; i++) {
+        <
+      }
+      wynikiBadan.reduce((wyniki) => {
+
+      });
+    }
+  });
+  reset.addEventListener('click', () => document.location.reload());
 }
 
 export default App;

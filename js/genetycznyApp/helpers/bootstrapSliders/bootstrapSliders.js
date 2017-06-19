@@ -10,7 +10,8 @@ function bootstrapSliders(options) {
     liczbaGenow,
     prawdKrzyzowania,
     prawdMutacji,
-    pula
+    pula,
+    badania
   } = options;
 
   const context = document.getElementById(rootNode);
@@ -21,7 +22,8 @@ function bootstrapSliders(options) {
     liczbaGenow: 'Liczba genów',
     prawdKrzyzowania: 'Prawdopodobieństwo krzyżowania',
     prawdMutacji: 'Prawdopodobieństwo mutacji',
-    pula: 'Pula'
+    pula: 'Pula',
+    badania: 'Liczba badań'
   }
 
   const suwakPokolen = createSlider(liczbaPokolen, 10, 100, 1, context, names.liczbaPokolen);
@@ -33,6 +35,7 @@ function bootstrapSliders(options) {
   const suwakMutacji = createSlider(prawdMutacji, 0.01, 0.5, 0.01, context, names.prawdMutacji);
   const checkerMutacji = createCheckbox('disableMutacji', 'Wyłącz mutacje', context);
   const suwakPuli = createSlider(pula, 10, 30, 1, context, names.pula);
+  const suwakBadan = createSlider(badania, 1, 10, 1, context, names.badania);
 
   return {
     suwakPokolen,
@@ -43,7 +46,8 @@ function bootstrapSliders(options) {
     suwakMutacji,
     suwakPuli,
     checkerKrzyzowania,
-    checkerMutacji
+    checkerMutacji,
+    suwakBadan
   };
 }
 

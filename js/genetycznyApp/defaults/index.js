@@ -7,11 +7,13 @@ const power2N = Math.pow(2, liczbaGenow);
 const pula = 20;
 const prawdKrzyzowania = 0.75;
 const prawdMutacji = 0.01;
+const badania = 1;
 const populacja = [];
 const nowePokolenie = [];
 const fenotypy = [];
 const dostosowanie = [];
 const rootNode = 'app';
+const wynikiNode = 'wyniki';
 
 let numerPokolenia = 1;
 
@@ -25,9 +27,11 @@ export {
   prawdKrzyzowania,
   prawdMutacji,
   populacja,
+  badania,
   nowePokolenie,
   fenotypy,
   dostosowanie,
   numerPokolenia,
-  rootNode
+  rootNode,
+  wynikiNode
 };
