@@ -9,7 +9,7 @@ const createRow = (isHead, values) => {
   return tr;
 }
 
-function pokazDostosowanieSrednie(nrPokolenia, rootNode, dostosowanie, dane, table, nrBadania) {
+function pokazDostosowanieSrednie(nrPokolenia, rootNode, dostosowanie, dane, table, nrBadania='srednia') {
   const { suwakPuli: pula } = dane;
   const context = document.getElementById(`wyniki_${nrBadania}`);
   if (nrPokolenia === 1) {

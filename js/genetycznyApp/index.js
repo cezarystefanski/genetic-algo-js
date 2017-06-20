@@ -4,7 +4,9 @@ import {
   bootstrapSliders,
   bootstrapButton,
   visualizeData,
-  bootstrapReset
+  bootstrapReset,
+  uruchomBadania,
+  dodajKontener
 } from './helpers/';
 
 import {
@@ -31,14 +33,8 @@ const runApp = (store, rootNode, nrBadania) => {
     accumulator[key] = store[key].value;
     return accumulator;
   }, {});
-  console.log(dane);
 
-  const div = document.createElement('div');
-  const table = document.createElement('table');
-  div.id = `wyniki_${nrBadania}`;
-  div.appendChild(table);
-  const wynikiNode = document.getElementById('wyniki');
-  wynikiNode.appendChild(div);
+  const { table, div } = dodajKontener(defaults, nrBadania);
   const wyniki = [];
   const baza = losujBaze(dane);
   const populacja = losujPopulacja(dane);
@@ -59,8 +55,7 @@ const runApp = (store, rootNode, nrBadania) => {
     numerPokolenia += 1;
     wyniki.push(pokazDostosowanieSrednie(numerPokolenia, rootNode, dostosowaniePoMutacji, dane, table, nrBadania));
   }
-  visualizeData(wyniki, nrBadania, defaults);
-  console.log(wyniki);
+  visualizeData(wyniki, div, nrBadania);
   return wyniki;
 }
 
@@ -70,22 +65,9 @@ const App = () => {
   const reset = bootstrapReset(defaults);
   const { rootNode } = defaults;
   button.addEventListener('click', () => {
-    let nrBadania = 1;
-    const wynikiBadan = [];
-    const wyniki = document.getElementById('wyniki');
-    wyniki.innerHTML = '';
-    for (nrBadania; nrBadania <= suwaki.suwakBadan.value; nrBadania++) {
-      wynikiBadan.push(runApp(suwaki, rootNode, nrBadania));
-    }
-    console.log(wynikiBadan);
-    if (suwaki.suwakBadan.value > 1) {
-      for (let i = 0; i < suwaki.suwakPokolen.value; i++) {
-        <
-      }
-      wynikiBadan.reduce((wyniki) => {
-
-      });
-    }
+    const srednieWyniki = uruchomBadania(suwaki, defaults, runApp);
+    const { div } = dodajKontener(defaults);
+    visualizeData(srednieWyniki, div);
   });
   reset.addEventListener('click', () => document.location.reload());
 }
