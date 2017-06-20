@@ -1,6 +1,5 @@
 import {
   losujBaze,
-  pokazPopulacje,
   bootstrapSliders,
   bootstrapButton,
   visualizeData,
