@@ -1,11 +1,11 @@
 import {
-  losujBaze,
   bootstrapSliders,
   bootstrapButton,
   visualizeData,
   bootstrapReset,
   uruchomBadania,
-  dodajKontener
+  dodajKontener,
+  tabulujRezultaty
 } from './helpers/';
 
 import {
@@ -35,7 +35,6 @@ const runApp = (store, rootNode, nrBadania) => {
 
   const { table, div } = dodajKontener(defaults, nrBadania);
   const wyniki = [];
-  const baza = losujBaze(dane);
   const populacja = losujPopulacja(dane);
   const fenotypy = obliczFenotypy(populacja, dane);
   const dostosowanie = obliczDostosowanie(fenotypy, dane);
@@ -67,6 +66,7 @@ const App = () => {
     const srednieWyniki = uruchomBadania(suwaki, defaults, runApp);
     const { div } = dodajKontener(defaults);
     visualizeData(srednieWyniki, div);
+    console.log(srednieWyniki);
   });
   reset.addEventListener('click', () => document.location.reload());
 }
