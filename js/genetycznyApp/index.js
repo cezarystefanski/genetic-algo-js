@@ -5,7 +5,8 @@ import {
   bootstrapReset,
   uruchomBadania,
   dodajKontener,
-  tabulujRezultaty
+  tabulujRezultaty,
+  createTabs
 } from './helpers/';
 
 import {
@@ -66,6 +67,7 @@ const App = () => {
     const srednieWyniki = uruchomBadania(suwaki, defaults, runApp);
     const { div } = dodajKontener(defaults);
     visualizeData(srednieWyniki, div);
+    createTabs(suwaki, defaults);
     console.log(srednieWyniki);
   });
   reset.addEventListener('click', () => document.location.reload());

@@ -5,6 +5,7 @@ import bootstrapReset from './bootstrapReset/';
 import uruchomBadania from './uruchomBadania/';
 import dodajKontener from './dodajKontener/';
 import tabulujRezultaty from './tabulujRezultaty/';
+import createTabs from './createTabs/';
 
 export { 
   bootstrapSliders,
@@ -13,5 +14,6 @@ export {
   bootstrapReset,
   uruchomBadania,
   dodajKontener,
-  tabulujRezultaty
+  tabulujRezultaty,
+  createTabs
 };
